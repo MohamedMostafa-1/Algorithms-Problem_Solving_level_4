@@ -61,10 +61,44 @@ string NumberToText(int Number) {
   
 }
 
+//#2
+short ReadYear() {
+    short Year = 0;
+    cout << "\nEnter Year: ";
+    cin >> Year;
+    return Year;
+}
+
+bool IsLeapYear(short Year) {
+    if (Year % 400 == 0)
+        return true;
+    else if (Year % 4 == 0 && Year % 100 != 0)
+        return true;
+    else
+        return false;
+}
+
 int main()
 {
-    int Number = ReadNumber();
-    cout << endl << NumberToText(Number) << endl;
+    //#1
+    //int Number = ReadNumber();
+    //cout << endl << NumberToText(Number) << endl;
+    cout << "\n===========================================================================\n";
+
+    //#2
+    short Year = ReadYear();
+    if (IsLeapYear(Year)) 
+        cout << "\nYes, Year [" << Year << "] is a leap year.\n";
+    else
+        cout << "\nNo, Year [" << Year << "] is NOT a leap year.\n";
+
+    
+
+
+
+
+
+
     system("pause>0");
     return 0;
 }
