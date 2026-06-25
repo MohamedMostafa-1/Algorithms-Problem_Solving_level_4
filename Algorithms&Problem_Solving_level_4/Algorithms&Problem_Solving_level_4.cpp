@@ -78,6 +78,27 @@ bool IsLeapYear(short Year) {
         return false;
 }
 
+//#3
+bool isLeapYear(short Year) {
+    return (Year % 400 == 0) || (Year % 4 == 0 && Year % 100 != 0);
+}
+
+//#4
+int NumberOfDayInYear(short Year) {
+    return isLeapYear(Year) ? 366 : 365;
+}
+int NumberOfHourInYear(short Year) {
+    return NumberOfDayInYear(Year)*24;
+}
+int NumberOfMinutesInYear(short Year) {
+    return NumberOfHourInYear(Year)*60;
+}
+int NumberOfSecondsInYear(short Year) {
+    return NumberOfMinutesInYear(Year)*60;
+}
+
+
+
 int main()
 {
     //#1
@@ -85,15 +106,19 @@ int main()
     //cout << endl << NumberToText(Number) << endl;
     cout << "\n===========================================================================\n";
 
-    //#2
+    //#2&3
     short Year = ReadYear();
     if (IsLeapYear(Year)) 
         cout << "\nYes, Year [" << Year << "] is a leap year.\n";
     else
         cout << "\nNo, Year [" << Year << "] is NOT a leap year.\n";
 
-    
-
+    cout << "\n===========================================================================\n";
+    //#4
+    cout << "\nNumber of Days in Year [" << Year << "] is "  << NumberOfDayInYear(Year);
+    cout << "\nNumber of Hours in Year [" << Year << "] is " << NumberOfHourInYear(Year);
+    cout << "\nNumber of Minutes in Year [" << Year << "] is " << NumberOfMinutesInYear(Year);
+    cout << "\nNumber of Seconds in Year [" << Year << "] is " << NumberOfSecondsInYear(Year);
 
 
 
