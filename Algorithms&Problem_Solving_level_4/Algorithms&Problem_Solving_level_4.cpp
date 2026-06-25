@@ -64,7 +64,7 @@ string NumberToText(int Number) {
 //#2
 short ReadYear() {
     short Year = 0;
-    cout << "\nEnter Year: ";
+    cout << "\nPlease Enter a Year To Chock? : ";
     cin >> Year;
     return Year;
 }
@@ -97,6 +97,34 @@ int NumberOfSecondsInYear(short Year) {
     return NumberOfMinutesInYear(Year)*60;
 }
 
+//#5
+short ReadMonth() {
+    short Month=0;
+    cout << "\nPlease Enter a Month To Chock? : ";
+    cin >> Month;
+    return Month;
+
+}
+short NumberOfDaysInMonth(short Month, short Year) {
+    if (Month < 1 || Month >12)
+        return 0;
+
+    if (Month == 2) {
+        return isLeapYear(Year) ? 29 : 28;
+    }
+
+    short arrDays[] = { 0 ,31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    return arrDays[Month];
+}
+int NumberOfHoursInMonth(short Month,short Year) {
+    return NumberOfDaysInMonth(Month,Year) * 60;
+}
+int NumberOfMinutesInMonth(short Month,short Year) {
+    return NumberOfHoursInMonth(Month,Year) * 60;
+}
+int NumberOfSecondsInMonth(short Month,short Year) {
+    return NumberOfMinutesInMonth(Month,Year) * 60;
+}
 
 
 int main()
@@ -121,6 +149,17 @@ int main()
     cout << "\nNumber of Seconds in Year [" << Year << "] is " << NumberOfSecondsInYear(Year);
 
 
+    cout << "\n===========================================================================\n";
+    //#5
+    short Month = ReadMonth();
+    cout << "\nNumber of Days in Month [" << Month << "] is "
+        << NumberOfDaysInMonth(Month, Year);
+    cout << "\nNumber of Hours in Month [" << Month << "] is "
+        << NumberOfHoursInMonth(Month, Year);
+    cout << "\nNumber of Minutes in Month [" << Month << "] is "
+        << NumberOfMinutesInMonth(Month, Year);
+    cout << "\nNumber of Seconds in Month [" << Month << "] is "
+        << NumberOfSecondsInMonth(Month, Year);
 
 
 
