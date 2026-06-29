@@ -142,18 +142,6 @@ int NumberOfSecondsInMonth(short Month,short Year) {
 
 
 //#7
-//short ReadYear() {
-//    short Year = 0;
-//    cout << "\nEnter a Year: ";
-//    cin >> Year;
-//    return Year;
-//}
-//short ReadMonth() {
-//    short Month = 0;
-//    cout << "\nEnter a Month: ";
-//    cin >> Month;
-//    return Month;
-//}
 short ReadDay() {
     short Day = 0;
     cout << "\nEnter a Day: ";
@@ -182,6 +170,37 @@ void PrintDayOrder(short Day, short Month, short Year) {
     cout << "Day Name  :" << DayShortName(DayOrder) << endl;
 }
 
+//#4
+string MonthShortName(short Month) {
+    string arrMonths[13] = {"","Jan", "Feb", "Mar","Apr", "May", "Jun","Jul", "Aug", "Sep","Oct", "Nov", "Dec"};
+    return arrMonths[Month];
+}
+void PrintMonthCalendar(short Month, short Year) {
+    int NumberOfDays;
+    // Index of the day from 0 to 6
+    int current = DayOfWeekOrder(1, Month, Year);
+    NumberOfDays = NumberOfDaysInMonth(Month, Year);
+    // Print the current month name
+    printf("\n _______________%s_______________\n\n",
+        MonthShortName(Month).c_str());
+    // Print the columns
+    printf("  Sun  Mon  Tue  Wed  Thu  Fri  Sat\n");
+    // Print appropriate spaces
+    int i;
+    for (i = 0; i < current; i++)
+        printf("     ");
+    for (int j = 1; j <= NumberOfDays; j++)
+    {
+        printf("%5d", j);
+        if (++i == 7)
+        {
+            i = 0;
+            printf("\n");
+        }
+    }
+    printf("\n _________________________________\n");
+    //cout << "\n_____________________________________________________________________\n";
+}
 
 int main()
 {
@@ -220,8 +239,13 @@ int main()
 
     cout << "\n===========================================================================\n";
     //#7
-    short Day = ReadDay();
-    PrintDayOrder(Day, Month, Year);
+    //short Day = ReadDay();
+    //PrintDayOrder(Day, Month, Year);
+
+    cout << "\n===========================================================================\n";
+    //#8
+    PrintMonthCalendar(Month, Year);
+
 
     system("pause>0");
     return 0;
