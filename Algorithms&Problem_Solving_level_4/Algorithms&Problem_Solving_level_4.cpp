@@ -313,6 +313,15 @@ bool IsDate1EqualDate2(stDate Date1, stDate Date2) {
     return (Date1.Year == Date2.Year) ? ((Date1.Month == Date2.Month) ? ((Date1.Day == Date2.Day) ? true : false) : false) : false;
 }
 
+//#15
+bool IsLastMonthInYear(short Month){
+    return (Month == 12);
+}
+bool IsLastDayInMonth(stDate Date){
+    short NumbetOfDays = NumberOfDaysInMonth(Date.Month, Date.Year);
+    return (Date.Day == NumbetOfDays);
+}
+
 
 int main()
 {
@@ -393,19 +402,32 @@ int main()
     cout << "\n===========================================================================\n";
     //#13
     //system("cls");
-    stDate Date1 = ReadFullDate();
-    stDate Date2 = ReadFullDate();
-    if(IsDate1BeforeDate2(Date1, Date2))
-        cout << "\nYes, Date1 is Less than Date2.";
-    else
-        cout << "\nNo, Date1 is NOT Less than Date2.";
+    //stDate Date1 = ReadFullDate();
+    //stDate Date2 = ReadFullDate();
+    //if(IsDate1BeforeDate2(Date1, Date2))
+    //    cout << "\nYes, Date1 is Less than Date2.";
+    //else
+    //    cout << "\nNo, Date1 is NOT Less than Date2.";
 
     cout << "\n===========================================================================\n";
     //#14
-    if(IsDate1EqualDate2(Date1, Date2))
-        cout << "\nYes, Date1 is Equal To Date2.";
+    //if(IsDate1EqualDate2(Date1, Date2))
+    //    cout << "\nYes, Date1 is Equal To Date2.";
+    //else
+    //    cout << "\nNo, Date1 is NOT Equal To Date2.";
+
+    cout << "\n===========================================================================\n";
+    //#15
+    stDate DateRead = ReadFullDate();
+    if (IsLastDayInMonth(DateRead))
+        cout << "\nYes, Day is Last Day in Month.";
     else
-        cout << "\nNo, Date1 is NOT Equal To Date2.";
+        cout << "\nNo, Day is Not Last Day in Month.";
+
+    if (IsLastMonthInYear(DateRead.Month))
+        cout << "\nYes, Month is Last Month in Year.";
+    else
+        cout << "\nNo, Month is Not Last Month in Year.";
 
 
     system("pause>0");
