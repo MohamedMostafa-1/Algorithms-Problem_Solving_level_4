@@ -66,7 +66,7 @@ string NumberToText(int Number) {
 //#2
 short ReadYear() {
     short Year = 0;
-    cout << "\nPlease Enter a Year To Chock? : ";
+    cout << "Please Enter a Year: ";
     cin >> Year;
     return Year;
 }
@@ -102,7 +102,7 @@ int NumberOfSecondsInYear(short Year) {
 //#5
 short ReadMonth() {
     short Month=0;
-    cout << "\nPlease Enter a Month To Chock? : ";
+    cout << "Please Enter a Month: ";
     cin >> Month;
     return Month;
 
@@ -144,7 +144,7 @@ int NumberOfSecondsInMonth(short Month,short Year) {
 //#7
 short ReadDay() {
     short Day = 0;
-    cout << "\nEnter a Day: ";
+    cout << "\nPlease Enter a Day: ";
     cin >> Day;
     return Day;
 }
@@ -300,11 +300,20 @@ stDate DateAddDays(int DaysAdding , stDate reDate) {
     return Date;
 }
 
+//#13
+bool IsDate1BeforeDate2(stDate Date1, stDate Date2) {
+    return (Date1.Year < Date2.Year) ? true : ((Date1.Year ==
+    Date2.Year) ? (Date1.Month < Date2.Month ? true : (Date1.Month ==
+    Date2.Month ? Date1.Day < Date2.Day : false)) : false);
+
+}
+
 int main()
 {
     short Year = ReadYear();
     short Month = ReadMonth();
     short Day = ReadDay();
+
 
     //#1
     //int Number = ReadNumber();
@@ -369,11 +378,21 @@ int main()
 
     cout << "\n===========================================================================\n";
     //#12
-    stDate ReadDate = ReadFullDate();
-    int DaysAdding = ReadDaysToAdd();
-    stDate Date1 = DateAddDays(DaysAdding, ReadDate);
-    cout << "\nDate After [" << DaysAdding << "] is: ";
-    cout << Date1.Day << "/" << Date1.Month << "/" << Date1.Year;
+    //stDate ReadDate = ReadFullDate();
+    //int DaysAdding = ReadDaysToAdd();
+    //stDate Date1 = DateAddDays(DaysAdding, ReadDate);
+    //cout << "\nDate After [" << DaysAdding << "] is: ";
+    //cout << Date1.Day << "/" << Date1.Month << "/" << Date1.Year;
+
+    cout << "\n===========================================================================\n";
+    //#13
+    system("cls");
+    stDate Date1 = ReadFullDate();
+    stDate Date2 = ReadFullDate();
+    if(IsDate1BeforeDate2(Date1, Date2))
+        cout << "\nYes, Date1 is Less than Date2.";
+    else
+        cout << "\nNo, Date1 is NOT Less than Date2.";
 
     system("pause>0");
     return 0;
