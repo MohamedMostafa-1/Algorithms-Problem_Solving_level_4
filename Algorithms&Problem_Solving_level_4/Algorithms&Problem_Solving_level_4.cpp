@@ -213,15 +213,31 @@ void PrintYearCalender(short Year) {
         PrintMonthCalendar(month , Year);
     }
 }
+
+//#10
+int NumberOfDaysFormTheBeginingOfTheYear(short Day, short Month, short Year){
+    int TotalDays = 0;
+    for (short  month = 1; month <= Month-1; month++)
+    {
+        TotalDays += NumberOfDaysInMonth(month, Year);
+    }
+    TotalDays += Day;
+    return TotalDays;
+}
+
+
 int main()
 {
+    short Year = ReadYear();
+    short Month = ReadMonth();
+    short Day = ReadDay();
+
     //#1
     //int Number = ReadNumber();
     //cout << endl << NumberToText(Number) << endl;
     cout << "\n===========================================================================\n";
 
     //#2&3
-    short Year = ReadYear();
     if (IsLeapYear(Year)) 
         cout << "\nYes, Year [" << Year << "] is a leap year.\n";
     else
@@ -237,7 +253,6 @@ int main()
 
     cout << "\n===========================================================================\n";
     //#5
-    short Month = ReadMonth();
     cout << "\nNumber of Days in Month [" << Month << "] is "
         << NumberOfDaysInMonth_better(Month, Year);
     cout << "\nNumber of Hours in Month [" << Month << "] is "
@@ -250,7 +265,6 @@ int main()
 
     cout << "\n===========================================================================\n";
     //#7
-    //short Day = ReadDay();
     //PrintDayOrder(Day, Month, Year);
 
     cout << "\n===========================================================================\n";
@@ -259,7 +273,11 @@ int main()
 
     cout << "\n===========================================================================\n";
     //#8
-    PrintYearCalender(Year);
+    //PrintYearCalender(Year);
+     
+
+    //#9
+    cout << "\n Number Of Days From The Begining Of The Year : " << NumberOfDaysFormTheBeginingOfTheYear(Day , Month,Year);
 
     system("pause>0");
     return 0;
