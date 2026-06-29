@@ -225,6 +225,56 @@ int NumberOfDaysFormTheBeginingOfTheYear(short Day, short Month, short Year){
     return TotalDays;
 }
 
+//#11
+struct stDate
+{
+    short Day;
+    short Month;
+    int Year;
+};
+void PrintDate(short Day, short Month, short Year) {
+    cout << "Date      :" << Day << "/" << Month << "/" << Year << endl;
+}
+void ConvertTotalDaysToDate(int TotalDays  , short Year ) {
+    short NumberOfMonth = 0;
+    short NumebrOfDayInLastMonth =0;
+  
+    while (TotalDays != 0) {
+        if (TotalDays <= 31){
+            NumebrOfDayInLastMonth = TotalDays;
+            ++NumberOfMonth;
+            break;
+        }
+
+        ++NumberOfMonth;
+        TotalDays -= NumberOfDaysInMonth(NumberOfMonth, Year);
+    }
+
+     PrintDate(NumebrOfDayInLastMonth, NumberOfMonth, Year);
+}
+
+stDate GetDateFromDayOrderInYear(short TotalDays, int Year) {
+    stDate Date;
+    short RemainingDays = TotalDays;
+    short MonthDays = 0;
+
+    Date.Month = 1;
+    Date.Year = Year;
+
+    while (true) {
+        MonthDays = NumberOfDaysInMonth(Date.Month, Year);
+        if (RemainingDays > MonthDays) {
+            RemainingDays -=MonthDays;
+            Date.Month++;
+        }
+        else {
+            Date.Day = RemainingDays;
+            break;
+        }
+    }
+    return Date;
+}
+
 
 int main()
 {
@@ -272,13 +322,22 @@ int main()
     //PrintMonthCalendar(Month, Year);
 
     cout << "\n===========================================================================\n";
-    //#8
+    //#9
     //PrintYearCalender(Year);
      
 
-    //#9
+    cout << "\n===========================================================================\n";
+    //#10
     cout << "\n Number Of Days From The Begining Of The Year : " << NumberOfDaysFormTheBeginingOfTheYear(Day , Month,Year);
 
+
+    cout << "\n===========================================================================\n";
+    //#11
+    short TotalDays = NumberOfDaysFormTheBeginingOfTheYear(Day, Month, Year);
+    ConvertTotalDaysToDate(TotalDays ,Year);
+    stDate Date = GetDateFromDayOrderInYear(TotalDays, Year);
+    cout << "Date for [" << TotalDays << "] is: ";
+    cout << Date.Day << "/" << Date.Month << "/" << Date.Year;
     system("pause>0");
     return 0;
 }
