@@ -170,7 +170,7 @@ void PrintDayOrder(short Day, short Month, short Year) {
     cout << "Day Name  :" << DayShortName(DayOrder) << endl;
 }
 
-//#4
+//#8
 string MonthShortName(short Month) {
     string arrMonths[13] = {"","Jan", "Feb", "Mar","Apr", "May", "Jun","Jul", "Aug", "Sep","Oct", "Nov", "Dec"};
     return arrMonths[Month];
@@ -202,6 +202,17 @@ void PrintMonthCalendar(short Month, short Year) {
     //cout << "\n_____________________________________________________________________\n";
 }
 
+//#9
+void PrintYearCalender(short Year) {
+    printf("\n______________________________\n\n");
+    printf("         Calender - %d           ", Year);
+    printf("\n______________________________\n");
+
+    for (short month = 1; month <= 12; month++)
+    {
+        PrintMonthCalendar(month , Year);
+    }
+}
 int main()
 {
     //#1
@@ -244,8 +255,11 @@ int main()
 
     cout << "\n===========================================================================\n";
     //#8
-    PrintMonthCalendar(Month, Year);
+    //PrintMonthCalendar(Month, Year);
 
+    cout << "\n===========================================================================\n";
+    //#8
+    PrintYearCalender(Year);
 
     system("pause>0");
     return 0;
