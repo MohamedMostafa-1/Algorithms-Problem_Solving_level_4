@@ -252,7 +252,6 @@ void ConvertTotalDaysToDate(int TotalDays  , short Year ) {
 
      PrintDate(NumebrOfDayInLastMonth, NumberOfMonth, Year);
 }
-
 stDate GetDateFromDayOrderInYear(short TotalDays, int Year) {
     stDate Date;
     short RemainingDays = TotalDays;
@@ -266,6 +265,10 @@ stDate GetDateFromDayOrderInYear(short TotalDays, int Year) {
         if (RemainingDays > MonthDays) {
             RemainingDays -=MonthDays;
             Date.Month++;
+            if (Date.Month > 12) {
+                Date.Month = 1;
+                Date.Year++;
+            }
         }
         else {
             Date.Day = RemainingDays;
@@ -275,6 +278,27 @@ stDate GetDateFromDayOrderInYear(short TotalDays, int Year) {
     return Date;
 }
 
+//#12
+stDate ReadFullDate() {
+    stDate Date;
+    Date.Day = ReadDay();
+    Date.Month = ReadMonth();
+    Date.Year = ReadYear();
+    return Date;
+}
+int ReadDaysToAdd() {
+    int Days=0;
+    cout << "\nHow Many Days To Add? ";
+    cin >> Days;
+    return Days;
+}
+stDate DateAddDays(int DaysAdding , stDate reDate) {
+    stDate Date;
+    int TotalDaysBeforeAdding = NumberOfDaysFormTheBeginingOfTheYear(reDate.Day, reDate.Month, reDate.Year);
+    int TotalDaysAfterAdding = TotalDaysBeforeAdding + DaysAdding;
+    Date = GetDateFromDayOrderInYear(TotalDaysAfterAdding , reDate.Year);
+    return Date;
+}
 
 int main()
 {
@@ -334,10 +358,23 @@ int main()
     cout << "\n===========================================================================\n";
     //#11
     short TotalDays = NumberOfDaysFormTheBeginingOfTheYear(Day, Month, Year);
+    // way one
     ConvertTotalDaysToDate(TotalDays ,Year);
+    // way two
     stDate Date = GetDateFromDayOrderInYear(TotalDays, Year);
+
     cout << "Date for [" << TotalDays << "] is: ";
     cout << Date.Day << "/" << Date.Month << "/" << Date.Year;
+
+
+    cout << "\n===========================================================================\n";
+    //#12
+    stDate ReadDate = ReadFullDate();
+    int DaysAdding = ReadDaysToAdd();
+    stDate Date1 = DateAddDays(DaysAdding, ReadDate);
+    cout << "\nDate After [" << DaysAdding << "] is: ";
+    cout << Date1.Day << "/" << Date1.Month << "/" << Date1.Year;
+
     system("pause>0");
     return 0;
 }
