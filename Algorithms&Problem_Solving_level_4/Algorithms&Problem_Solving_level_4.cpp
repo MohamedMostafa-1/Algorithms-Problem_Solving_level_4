@@ -348,6 +348,16 @@ stDate IncreaseDateByOneDay_Dr_Solution(stDate Date) {
     return Date;
 }
 
+//#17
+int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false) {
+    int Day = 0;
+    while (IsDate1BeforeDate2(Date1, Date2)) {
+        Day++;
+        Date1 = IncreaseDateByOneDay_Dr_Solution(Date1);
+    }
+    return IncludeEndDay ? ++Day : Day;
+}
+
 int main()
 {
     short Year = ReadYear();
@@ -457,11 +467,24 @@ int main()
 
     cout << "\n===========================================================================\n";
     //#16
-    stDate Date3 = ReadFullDate();
-    //Date3 = IncreaseDateByOneDay(Date3);
-    Date3 = IncreaseDateByOneDay_Dr_Solution(Date3);
-    cout << "\nDate After Adding One is: ";
-    cout << Date3.Day << "/" << Date3.Month << "/" << Date3.Year;
+    //stDate Date3 = ReadFullDate();
+    ////Date3 = IncreaseDateByOneDay(Date3);
+    //Date3 = IncreaseDateByOneDay_Dr_Solution(Date3);
+    //cout << "\nDate After Adding One is: ";
+    //cout << Date3.Day << "/" << Date3.Month << "/" << Date3.Year;
+
+
+    cout << "\n===========================================================================\n";
+    //#16
+    stDate Date1 = ReadFullDate();
+    stDate Date2 = ReadFullDate();
+
+    cout << "\nDiffrence is: "
+        << GetDifferenceInDays(Date1, Date2) << " Day(s).";
+    cout << "\nDiffrence (Including End Day) is: "
+        << GetDifferenceInDays(Date1, Date2, true) << " Day(s).";
+
+
 
     system("pause>0");
     return 0;
