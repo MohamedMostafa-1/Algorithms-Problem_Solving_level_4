@@ -353,16 +353,40 @@ stDate IncreaseDateByOneDay_Dr_Solution(stDate Date) {
 }
 
 //#17
+//#19
+void SwapDates(stDate Date1, stDate Date2) {
+    stDate TempDate
+        ;
+    TempDate.Year = Date1.Year;
+    TempDate.Month = Date1.Month;
+    TempDate.Day = Date1.Day;
+
+    Date1.Year = Date2.Year;
+    Date1.Month = Date2.Month;
+    Date1.Day = Date2.Day;
+
+    Date2.Year = TempDate.Year;
+    Date2.Month = TempDate.Month;
+    Date2.Day = TempDate.Day;
+}
 int GetDifferenceInDays(stDate Date1, stDate Date2, bool
     IncludeEndDay = false)
 {
     int Days = 0;
+    short SawpFlagValue = 1;
+    if (!IsDate1BeforeDate2(Date1, Date2))
+    {
+        //Swap Dates
+        SwapDates(Date1, Date2);
+        SawpFlagValue = -1;
+    }
     while (IsDate1BeforeDate2(Date1, Date2))
     {
         Days++;
         Date1 = IncreaseDateByOneDay(Date1);
     }
-    return IncludeEndDay ? ++Days : Days;
+    return IncludeEndDay ? ++Days * SawpFlagValue : Days *
+        SawpFlagValue;
 }
 
 //#18
@@ -508,13 +532,21 @@ int main()
 
     cout << "\n===========================================================================\n";
     //#18
-    cout << "\nEnter Your Date Of Barth: ";
-    stDate BarthDate = ReadFullDate();
-    stDate SystemDate = GetSystemDate();
-    cout << "\nYour Age is : "
-        << GetDifferenceInDays(BarthDate, SystemDate, true) << " Day(s).";
+    //cout << "\nEnter Your Date Of Barth: ";
+    //stDate BarthDate = ReadFullDate();
+    //stDate SystemDate = GetSystemDate();
+    //cout << "\nYour Age is : "
+    //    << GetDifferenceInDays(BarthDate, SystemDate, true) << " Day(s).";
 
 
+    cout << "\n===========================================================================\n";
+    //#19
+    stDate Date1 = ReadFullDate();
+    stDate Date2 = ReadFullDate();
+    cout << "\nDiffrence is: "
+        << GetDifferenceInDays(Date1, Date2) << " Day(s).";
+    cout << "\nDiffrence (Including End Day) is: "
+        << GetDifferenceInDays(Date1, Date2, true) << " Day(s).";
 
     system("pause>0");
     return 0;
