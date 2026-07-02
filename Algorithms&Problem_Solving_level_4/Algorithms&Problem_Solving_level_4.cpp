@@ -323,6 +323,31 @@ bool IsLastDayInMonth(stDate Date){
 }
 
 
+//#16
+stDate IncreaseDateByOneDay(stDate Date) {
+    int NumberOfDay = NumberOfDaysFormTheBeginingOfTheYear(Date.Day, Date.Month, Date.Year)+1;
+    return GetDateFromDayOrderInYear(NumberOfDay ,Date.Year);
+}
+stDate IncreaseDateByOneDay_Dr_Solution(stDate Date) {
+    if (IsLastDayInMonth(Date)) {
+        if (IsLastMonthInYear(Date.Month)) {
+            Date.Day = 1;
+            Date.Month = 1;
+            Date.Year++;
+        }
+        else
+        {
+            Date.Day = 1;
+            Date.Month = 1;
+        }
+    }
+    else
+    {
+        Date.Day++;
+    }
+    return Date;
+}
+
 int main()
 {
     short Year = ReadYear();
@@ -418,17 +443,25 @@ int main()
 
     cout << "\n===========================================================================\n";
     //#15
-    stDate DateRead = ReadFullDate();
-    if (IsLastDayInMonth(DateRead))
-        cout << "\nYes, Day is Last Day in Month.";
-    else
-        cout << "\nNo, Day is Not Last Day in Month.";
+    //stDate DateRead = ReadFullDate();
+    //if (IsLastDayInMonth(DateRead))
+    //    cout << "\nYes, Day is Last Day in Month.";
+    //else
+    //    cout << "\nNo, Day is Not Last Day in Month.";
 
-    if (IsLastMonthInYear(DateRead.Month))
-        cout << "\nYes, Month is Last Month in Year.";
-    else
-        cout << "\nNo, Month is Not Last Month in Year.";
+    //if (IsLastMonthInYear(DateRead.Month))
+    //    cout << "\nYes, Month is Last Month in Year.";
+    //else
+    //    cout << "\nNo, Month is Not Last Month in Year.";
 
+
+    cout << "\n===========================================================================\n";
+    //#16
+    stDate Date3 = ReadFullDate();
+    //Date3 = IncreaseDateByOneDay(Date3);
+    Date3 = IncreaseDateByOneDay_Dr_Solution(Date3);
+    cout << "\nDate After Adding One is: ";
+    cout << Date3.Day << "/" << Date3.Month << "/" << Date3.Year;
 
     system("pause>0");
     return 0;
