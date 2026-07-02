@@ -328,11 +328,11 @@ bool IsLastDayInMonth(stDate Date){
 
 
 //#16
-stDate IncreaseDateByOneDay(stDate Date) {
+stDate IncreaseDateByOneDay_Me(stDate Date) {
     int NumberOfDay = NumberOfDaysFormTheBeginingOfTheYear(Date.Day, Date.Month, Date.Year)+1;
     return GetDateFromDayOrderInYear(NumberOfDay ,Date.Year);
 }
-stDate IncreaseDateByOneDay_Dr_Solution(stDate Date) {
+stDate IncreaseDateByOneDay(stDate Date) {
     if (IsLastDayInMonth(Date)) {
         if (IsLastMonthInYear(Date.Month)) {
             Date.Day = 1;
@@ -404,6 +404,124 @@ stDate GetSystemDate() {
 
 
 //#20 to #32
+stDate DecreaseDateByXDays( short DaysAdding, stDate Date ) {
+    for (short i = 1; i <= DaysAdding; i++)
+    {
+       Date =  IncreaseDateByOneDay(Date);
+    }
+
+    return Date;
+}
+
+stDate IncreaseDateByOneWeek(stDate Date) {
+    for (short i = 1; i <= 7; i++)
+    {
+        Date = IncreaseDateByOneDay(Date);
+    }
+    return Date;
+}
+stDate IncreaseDateByXWeeks(short WeeksAdding,stDate Date ) {
+    for (short i = 1; i <= WeeksAdding; i++)
+    {
+        Date = IncreaseDateByOneWeek(Date);
+    }
+    return Date;
+}
+
+stDate IncreaseDateByOneMonth(stDate Date) {
+    if (Date.Month == 12) {
+        Date.Month = 1;
+        Date.Year++;
+    }
+    else
+    {
+        Date.Month++;
+    }
+    short NumberOfDaysInCurrentMonth = NumberOfDaysInMonth(Date.Month , Date.Year);
+    if (Date.Day > NumberOfDaysInCurrentMonth) {
+        Date.Day = NumberOfDaysInCurrentMonth;
+    }
+
+        return Date;
+}
+stDate IncreaseDateByXMonths(short MonthsAdding,stDate Date ) {
+    for (short i = 1; i <= MonthsAdding; i++)
+    {
+        Date = IncreaseDateByOneMonth(Date);
+    }
+    return Date;
+
+
+}
+
+stDate IncreaseDateByOneYear(stDate Date) {
+
+    Date.Year++;
+    return Date;
+}
+stDate IncreaseDateByXYears(short YearsAdding,stDate Date) {
+    for (short i = 1; i <= YearsAdding; i++)
+    {
+        Date = IncreaseDateByOneYear(Date);
+    }
+    return Date;
+}
+stDate IncreaseDateByXYearsFaster(short YearsAdding, stDate Date ) {
+    Date.Year + YearsAdding;
+    return Date;
+}
+
+stDate IncreaseDateByOneDecade(stDate Date) {
+
+    Date.Year+10;
+    return Date;
+}
+stDate IncreaseDateByXDecades(short DecadesAdding , stDate Date ) {
+    for (short i = 1; i <= DecadesAdding; i++)
+    {
+        Date = IncreaseDateByOneDecade(Date);
+    }
+    return Date;
+}
+stDate IncreaseDateByXDecadesFaster(short DecadesAdding ,stDate Date) {
+    Date.Year + (10 * DecadesAdding);
+    return Date;
+}
+
+
+stDate IncreaseDateByOneCentury(stDate Date) {
+
+    Date.Year+100;
+    return Date;
+}
+stDate IncreaseDateByOneMillennium(stDate Date) {
+
+    Date.Year+1000;
+    return Date;
+}
+
+//===========================================================================================================
+
+//#33 to #46
+stDate DecreaseDateByOneDay(stDate Date) {
+    if (Date.Day == 1) {
+        if (Date.Month == 1) {
+            Date.Day = 31;
+            Date.Month = 12;
+            Date.Year--;
+        }
+        else
+        {
+            Date.Month--;
+            Date.Day = NumberOfDaysInMonth(Date.Month , Date.Year);
+        }
+    }
+    else
+    {
+        Date.Day--;
+    }
+    return Date;
+}
 stDate IncreaseDateByXDays( short DaysAdding, stDate Date ) {
     for (short i = 1; i <= DaysAdding; i++)
     {
