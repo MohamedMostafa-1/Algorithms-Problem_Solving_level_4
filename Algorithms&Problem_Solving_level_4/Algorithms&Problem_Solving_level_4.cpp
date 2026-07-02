@@ -1,6 +1,10 @@
+//time
+#pragma warning(disable : 4996)
+
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <ctime>
 
 
 using namespace std;
@@ -349,14 +353,32 @@ stDate IncreaseDateByOneDay_Dr_Solution(stDate Date) {
 }
 
 //#17
-int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false) {
-    int Day = 0;
-    while (IsDate1BeforeDate2(Date1, Date2)) {
-        Day++;
-        Date1 = IncreaseDateByOneDay_Dr_Solution(Date1);
+int GetDifferenceInDays(stDate Date1, stDate Date2, bool
+    IncludeEndDay = false)
+{
+    int Days = 0;
+    while (IsDate1BeforeDate2(Date1, Date2))
+    {
+        Days++;
+        Date1 = IncreaseDateByOneDay(Date1);
     }
-    return IncludeEndDay ? ++Day : Day;
+    return IncludeEndDay ? ++Days : Days;
 }
+
+//#18
+stDate GetSystemDate() {
+    stDate Date;
+
+    time_t t = time(0);
+    tm* now = localtime(&t);
+
+    Date.Year = now->tm_year + 1900;
+    Date.Month = now->tm_mon + 1;
+    Date.Day = now->tm_mday;   
+
+    return Date;
+}
+
 
 int main()
 {
@@ -475,14 +497,22 @@ int main()
 
 
     cout << "\n===========================================================================\n";
-    //#16
-    stDate Date1 = ReadFullDate();
-    stDate Date2 = ReadFullDate();
+    //#17
+    //stDate Date1 = ReadFullDate();
+    //stDate Date2 = ReadFullDate();
 
-    cout << "\nDiffrence is: "
-        << GetDifferenceInDays(Date1, Date2) << " Day(s).";
-    cout << "\nDiffrence (Including End Day) is: "
-        << GetDifferenceInDays(Date1, Date2, true) << " Day(s).";
+    //cout << "\nDiffrence is: "
+    //    << GetDifferenceInDays(Date1, Date2) << " Day(s).";
+    //cout << "\nDiffrence (Including End Day) is: "
+    //    << GetDifferenceInDays(Date1, Date2, true) << " Day(s).";
+
+    cout << "\n===========================================================================\n";
+    //#18
+    cout << "\nEnter Your Date Of Barth: ";
+    stDate BarthDate = ReadFullDate();
+    stDate SystemDate = GetSystemDate();
+    cout << "\nYour Age is : "
+        << GetDifferenceInDays(BarthDate, SystemDate, true) << " Day(s).";
 
 
 
